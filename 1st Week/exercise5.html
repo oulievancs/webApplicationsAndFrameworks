@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+	<script>
+	var app = angular.module('myApp', []);
+	
+	app.controller('myCtl', function($scope) {
+		$scope.profs = ['Bodrug', 'P2', 'P3'];
+		$scope.screen = "";
+		$scope.errorMessageDescr = 'Please check your form!';
+		
+		$scope.myShow = function() {
+			if ($scope.professor != undefined && $scope.professor != "" && $scope.course != undefined && $scope.mark != undefined) {
+				$scope.screen += $scope.professor + ' on Course named ' + $scope.course + ' sets mark ' + $scope.mark + '<br/>';
+				$scope.errorMessage = false;
+			} else {
+				$scope.errorMessage = true;
+			}
+		}
+	});
+	</script>
+	
+	<div ng-app="myApp" ng-controller="myCtl">
+		<form name="my_form">
+			<div><h3>Select a Professor</h3>
+				<select name="professor" ng-model="professor">
+					<!--ng-repeat for hashed HTML of options-->
+					<option ng-repeat="x in profs" value="{{x}}">{{x}}</option>
+				</select>
+			</div>
+			
+			<div><h3>Select a Course</h3>
+				<input type="radio" name="course_name" ng-model="course" value="DB" />DB<br/>
+				<input type="radio" name="course_name" ng-model="course" value="C2" />C2<br/>
+				<input type="radio" name="course_name" ng-model="course" value="C3" />C3<br/>
+			</div>
+			
+			<div><h3>Select a Mark</h3>
+				<input type="radio" name="mark_num" ng-model="mark" value="4" />4<br/>
+				<input type="radio" name="mark_num" ng-model="mark" value="5" />5<br/>
+				<input type="radio" name="mark_num" ng-model="mark" value="6" />6<br/>
+				<input type="radio" name="mark_num" ng-model="mark" value="7" />7<br/>
+				<input type="radio" name="mark_num" ng-model="mark" value="8" />8<br/>
+				<input type="radio" name="mark_num" ng-model="mark" value="9" />9<br/>
+				<input type="radio" name="mark_num" ng-model="mark" value="10" />10<br/>
+			</div>
+			
+			<div><h3>Show</h3>
+				<font color="red" ng-show="errorMessage"><a ng-bind="errorMessageDescr"></a></font>
+				<font ng-show="!errorMessage"><a ng-bind-html="screen"></a></font>
+			</div><br/>
+			
+			<div>
+				<input type="button" ng-click="myShow();" value="Calc" />
+			</div>
+		</form>
+	</div>
+	
+</body>
+</html>

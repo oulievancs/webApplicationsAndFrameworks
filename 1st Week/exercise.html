@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+<body>
+	<h1>Calculator</h1>
+	<div ng-app="Calculator" ng-init="a=0;b=1">
+		
+		<input type="number" ng-model="a" /><br/>
+		<input type="number" ng-model="b" /><br/>
+		
+		<a name="result">a + b = {{a + b}}</a><br/>
+		<a name="result2">a - b = {{a - b}}</a><br/>
+		<a name="result3">a * b = {{a * b}}</a><br/>
+		<a ng-if="b != 0" name="result">a / b = {{a / b}}</a><br/>
+
+		<p style="font-color : red;" ng-if="b == 0"><font color="red">Divide by 0</font></p>
+	</div>
+	
+	<script>
+		angular.module('Calculator', []);
+	</script>
+</body>
+</html>

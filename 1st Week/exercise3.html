@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+	<div ng-app="myApp" ng-controller="myCtl">
+		<div ng-repeat="a1 in num">
+			<a ng-repeat="a2 in num">[{{a1 * a2}}] </a>
+		</div><br>
+	</div>
+	
+	<script>
+	var app = angular.module('myApp', []);
+	
+	app.controller('myCtl', function($scope) {
+		$scope.num=[1,2,3,4,5,6,7,8,9];
+		$scope.max = 9;
+	});
+	</script>
+</body>
+</html>
