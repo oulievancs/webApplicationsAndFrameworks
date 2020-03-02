@@ -5,20 +5,23 @@
 	<div ng-app="myApp" ng-controller="myCtl" >
 		<input  type="number" ng-model="number2" /><br>
 		<p>The result is {{result}}.<!--<a ng-bind="result"></a>--><p>
+		<!--I made a try to use a button and a click listener and it worked.-->
+		<button ng-click="calc()">Calc</button>
 	</div>
 	
 	<script>
 	var app = angular.module('myApp', []);
 	
+	app.controller('myCtl', function($scope, myHex) {
+		$scope.calc = function() {
+			$scope.result = myHex.myPower($scope.number2);
+		}
+	});
+		
 	app.service('myHex', function() {
 		this.myPower = function(a) {
 			return (a*a);
 		}
-	});
-	
-	app.controller('myCtl', function($scope, myHex) {
-		$scope.number2 = 3;
-		$scope.result = myHex.myPower($scope.number2);
 	});
 	</script>
 </body>
