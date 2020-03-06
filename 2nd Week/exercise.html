@@ -7,26 +7,22 @@
     
     myApp.controller("myCtl", function($scope) {
         $scope.addrs = [];
+        $scope.commentaries = ["friend", "colleague", "family"];
         
         $scope.addRow = function() {
-            if (!$scope.name || !$scope.address || !$scope.mobilePhone || !$scope.friend || !$scope.collegue || !$scope.family) {
+            if (!$scope.name || !$scope.mobilePhone || !$scope.commentary) {
                 $scope.result = true;
             } else {
                 row = [];
                 row.name = $scope.name;
-                row.address = $scope.address;
-                row.mobilePhone = $scope.mobilePhone;
-                row.commentary = [];
-                
-                row.commentary.friend = $scope.friend;
-                row.commentary.collegue = $scope.collegue;
-                row.commentary.family = $scope.family;
+                row.mobilePhone = $scope.mobilePhone;                
+                row.commentary = $scope.commentary;
                 
                 $scope.addrs.push(row);
                 $scope.result = false;
             }
             
-            $scope.name = $scope.address = $scope.mobilePhone = $scope.friend = $scope.collegue = $scope.family = "";
+            $scope.name = $scope.address = $scope.mobilePhone = "";
         }
         
         $scope.remove = function() {
@@ -49,28 +45,18 @@
                 <form>
                     <h3 class="panel-heading">Address Entry</h3>
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label>Name</label>
                         <input class="form-control" ng-model="name"/><br/>
-                    </div>
-                    <div class="form-group">
-                        <label>Address</label>
-                        <input class="form-control" ng-model="address"/><br/>
                     </div>
                     <div class="form-group">
                         <label>Mobile Phone</label>
                         <input class="form-control" ng-model="mobilePhone"/><br/>
                     </div>
                     <div class="form-group">
-                        <label>Friend</label>
-                        <input class="form-control" ng-model="friend"/><br/>
-                    </div>
-                    <div class="form-group">
-                        <label>Collegue</label>
-                        <input class="form-control" ng-model="collegue"/><br/>
-                    </div>
-                    <div class="form-group">
-                        <label>Family</label>
-                        <input class="form-control" ng-model="family"/><br/>
+                        <label>Select Commentrary</label>
+                        <select class="form-control" name="commentary" ng-model="commentary">
+                            <option ng-repeat="comm in commentaries" value="{{comm}}">{{comm}}</option>
+                        </select>
                     </div>
                     
                     <div class="form-group">
@@ -91,24 +77,20 @@
                     <thead>
                         <tr>
                             <th colspan="2"><center>Personnal</center></th>
-                            <th colspan="3"><center>Commentary</center></th>
+                            <th colspan="1"><center>Commentary</center></th>
                             <th colspan="1"><center>Edit</center></th>
                         </tr>
                         <tr>
                             <th>Name</th>
                             <th>Mobile phone</th>
-                            <th>Friend</th>
-                            <th>Collegue</th>
-                            <th>Family</th>
+                            <th>Value</th>
                             <th>Remove</th>
                         </tr>
                     </thead>
                     <tr ng-repeat="addr in addrs">
                         <td>{{addr.name}}</td>
                         <td>{{addr.mobilePhone}}</td>
-                        <td>{{addr.commentary.friend}}</td>
-                        <td>{{addr.commentary.collegue}}</td>
-                        <td>{{addr.commentary.family}}</td>
+                        <td>{{addr.commentary}}</td>
                         <td><div class="form-check">
                             <input type="checkbox" class="form-check-input" ng-model="addr.Remove" />
                         </div></td>
