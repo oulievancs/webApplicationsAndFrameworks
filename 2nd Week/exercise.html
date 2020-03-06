@@ -9,17 +9,22 @@
         $scope.addrs = [];
         
         $scope.addRow = function() {
-            row = [];
-            row.name = $scope.name;
-            row.address = $scope.address;
-            row.mobilePhone = $scope.mobilePhone;
-            row.commentary = [];
-            
-            row.commentary.friend = $scope.friend;
-            row.commentary.collegue = $scope.collegue;
-            row.commentary.family = $scope.family;
-            
-            $scope.addrs.push(row);
+            if (!$scope.name || !$scope.address || !$scope.mobilePhone || !$scope.friend || !$scope.collegue || !$scope.family) {
+                $scope.result = true;
+            } else {
+                row = [];
+                row.name = $scope.name;
+                row.address = $scope.address;
+                row.mobilePhone = $scope.mobilePhone;
+                row.commentary = [];
+                
+                row.commentary.friend = $scope.friend;
+                row.commentary.collegue = $scope.collegue;
+                row.commentary.family = $scope.family;
+                
+                $scope.addrs.push(row);
+                $scope.result = false;
+            }
             
             $scope.name = $scope.address = $scope.mobilePhone = $scope.friend = $scope.collegue = $scope.family = "";
         }
@@ -45,33 +50,37 @@
                     <h3 class="panel-heading">Address Entry</h3>
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input class="form-control" ng-model="name" required/><br/>
+                        <input class="form-control" ng-model="name"/><br/>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <input class="form-control" ng-model="address" required/><br/>
+                        <input class="form-control" ng-model="address"/><br/>
                     </div>
                     <div class="form-group">
                         <label>Mobile Phone</label>
-                        <input class="form-control" ng-model="mobilePhone" required/><br/>
+                        <input class="form-control" ng-model="mobilePhone"/><br/>
                     </div>
                     <div class="form-group">
                         <label>Friend</label>
-                        <input class="form-control" ng-model="friend" required/><br/>
+                        <input class="form-control" ng-model="friend"/><br/>
                     </div>
                     <div class="form-group">
                         <label>Collegue</label>
-                        <input class="form-control" ng-model="collegue" required/><br/>
+                        <input class="form-control" ng-model="collegue"/><br/>
                     </div>
                     <div class="form-group">
                         <label>Family</label>
-                        <input class="form-control" ng-model="family" required/><br/>
+                        <input class="form-control" ng-model="family"/><br/>
                     </div>
                     
                     <div class="form-group">
                         <span class="input-group-btn">
                             <button class="btn btn-primary" ng-click="addRow()">ADD</button>
                         </span>
+                    </div>
+                    <div ng-show="result">
+                        <font color="red">An empty label found!
+                        </font>
                     </div>
                 </form>
                 <br/>
