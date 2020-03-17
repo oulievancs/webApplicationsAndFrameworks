@@ -1,0 +1,30 @@
+<html ng-app="myApp">
+	<head>
+		<title>Calc</title>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+                <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+		<script src="math.js"></script>
+	</head>
+	<body ng-controller="myCtrl">
+		<h3>A Calculator</h3>
+		<table>
+			<tr>
+				<td>Give a:</td>
+				<td><input type="number" class="form-control" ng-model="a"/></td>
+			</tr>
+			<tr>
+				<td>Give b:</td>
+				<td><input type="number" class="form-control" ng-model="b"/></td>
+			</tr>
+			<br/>
+			<tr>
+				<td>Result:</td>
+				<td><div class="form-control" ng-bind="result"></div></td>
+			</tr>
+			<tr>
+				<td><button class="btn" ng-click="calc()">Calculate</button><td>
+				<td></td>
+			</tr>
+		</table>
+	</body>
+</html>

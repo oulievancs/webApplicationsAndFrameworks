@@ -1,0 +1,16 @@
+{
+  "name": "psrxjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "math.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.7.9",
+    "angular-mocks": "^1.7.9",
+    "bootstrap": "lateist"
+  }
+}
