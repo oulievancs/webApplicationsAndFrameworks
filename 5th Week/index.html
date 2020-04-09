@@ -87,14 +87,18 @@
         
         $scope.modifyProduct = function() {
             if ($scope.role == 'admin') {
-                $scope.change = true;
-                
-                angular.forEach($scope.products, function(value) {
-                    if ($scope.toModify == value.productName) {
-                        $scope.newProductName = value.productName;
-                        $scope.newProductPrice = value.productPrice;
-                    }
-                });
+                if ($scope.toModify != '') {
+                    $scope.change = true;
+                    
+                    angular.forEach($scope.products, function(value) {
+                        if ($scope.toModify == value.productName) {
+                            $scope.newProductName = value.productName;
+                            $scope.newProductPrice = value.productPrice;
+                        }
+                    });
+                } else {
+                    alert("Select a product.");
+                }
             }
         }
         
@@ -323,10 +327,11 @@
                     <td>
                         <div class="input-group">
                             <select ng-model="toModify">
+                                <option value=''>None</option>
                                 <option ng-repeat="p in products" value="{{p.productName}}">{{p.productName}}</option>
                             </select>
                             <div class="input-group-append">
-                                <button class="btn btn-warning" ng-click="modifyProduct(); newProductName = ''; newProductPrice = '';">Modify Product</button></td>
+                                <button class="btn btn-warning" ng-click="modifyProduct();">Modify Product</button></td>
                             </div>
                         </div>
                     </td>
@@ -336,7 +341,12 @@
             
             <div ng-show="(toModify != '' && toModify != null && change==true) || (addProduct==true)">
                 <br/>
-                <h4>Modify Product</h4>
+                <div ng-show="change==true">
+                    <h4>Modify Product</h4>
+                </div>
+                <div ng-show="addProduct==true">
+                    <h4>Add New Product</h4>
+                </div>
                 <table>
                     <tr>
                         <td>
@@ -372,7 +382,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><button class="btn btn-warning" ng-click="change=false; addProduct=false;" >Back</button>
+                        <td><button class="btn btn-warning" ng-click="change=false; addProduct=false; newProductName=''; newProductPrice='';" >Back</button>
                         <td></td>
                     </tr>
                 </table>
