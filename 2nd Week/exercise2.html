@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+<title>Controllers</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+<script>
+angular.module("exampleApp", [])
+	.controller("simpleCtrl", function ($scope, $rootScope) {
+		$scope.addresses = {};
+		//Receive from broadcast channel the data and handle them.
+		$scope.$on("zipCodeUpdated", function(event, args) {
+			$scope[args.type] = args.zipCode;
+		});
+		
+		$scope.setAddress = function (type, zip) {
+			console.log("Type: " + type + " " + zip);
+			//Send to broadcast channel the form data.
+			$rootScope.$broadcast("zipCodeUpdated", {
+				type: type,
+				zipCode: zip
+			});
+		}
+		$scope.copyAddress = function () {
+			$scope.shippingZip = $scope.billingZip;
+		}
+});
+</script>
+</head>
+<body>
+	<div ng-controller="simpleCtrl" class="well">
+		<h4>Billing Zip Code</h4>
+		<div class="form-group">
+			<input class="form-control" ng-model="billingZip"/>
+		</div>
+		<button class="btn btn-primary" ng-click="setAddress('billingZip', billingZip)">Save Billing</button>
+	</div>
+	<div ng-controller="simpleCtrl" class="well">
+		<h4>Shipping Zip Code</h4>
+		<div class="form-group">
+			<input class="form-control" ng-model="shippingZip"/>
+		</div>
+		<button class="btn btn-primary" ng-click="copyAddress()">Use Billing</button>
+		<button class="btn btn-primary"	ng-click="setAddress('shippingZip', shippingZip)">Save Shipping</button>
+	</div>
+</body>
+</html>
